@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -8,39 +8,36 @@ import * as RepositoriesActions from '../../store/ducks/repositores/actions';
 
 import RepositoryItem from '../RepositoryItem';
 
-interface StateProps{
+interface StateProps {
     repositories: Repository[],
 }
 
-interface DispatchProps{
+interface DispatchProps {
     loadRequest(): void,
 }
 
 type Props = StateProps & DispatchProps;
 
-class RepositoryList extends Component<Props> {
-    componentDidMount() {
-        const { loadRequest } = this.props;
+export function RepositoryList({ repositories, loadRequest }: Props) {
+    useEffect(() => {
         loadRequest();
-    }
+    }, []);
 
-    render() {
-        const { repositories } = this.props;
-
-        return (
-          <ul>
-            {repositories.map(repository => (
-              <RepositoryItem
-                key={repository.id}
-                repository={repository}
-              />
-))}
-          </ul>
-);
-    }
+    return (
+      <ul>
+        {
+             repositories.map(repository => (
+               <RepositoryItem
+                 key={repository.id}
+                 repository={repository}
+               />
+             ))
+            }
+      </ul>
+    );
 }
 
-const mapStateToProps = (state : ApplicationState) => ({
+const mapStateToProps = (state: ApplicationState) => ({
     repositories: state.repositories.data,
 });
 
