@@ -1,3 +1,5 @@
+This project development in TypeScript, using react-saga, redux, react. With the help [Rocketseat](https://rocketseat.com.br/)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
