@@ -18,7 +18,7 @@ interface DispatchProps {
 
 type Props = StateProps & DispatchProps;
 
-export function RepositoryList({ repositories, loadRequest }: Props) {
+const RepositoryList :React.FC<Props> = ({ repositories, loadRequest }:Props) => {
     useEffect(() => {
         loadRequest();
     }, []);
@@ -35,7 +35,7 @@ export function RepositoryList({ repositories, loadRequest }: Props) {
             }
       </ul>
     );
-}
+};
 
 const mapStateToProps = (state: ApplicationState) => ({
     repositories: state.repositories.data,
